@@ -62,9 +62,9 @@
 	      <p>
 	        <span style="padding-right:10px;"><spring:message code="language" /></span>
             <form:radiobutton path="language" id="zh" value="zh" />
-            <label for="zh"><spring:message code="chinese" /></label>
+            <label for="zh"><spring:message code="language.chinese" /></label>
             <form:radiobutton path="language" id="en" value="en" />
-            <label for="en"><spring:message code="engligh" /></label>
+            <label for="en"><spring:message code="language.chinese" /></label>
           </p>
 
 	      <p>

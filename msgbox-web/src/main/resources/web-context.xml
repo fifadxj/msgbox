@@ -46,7 +46,7 @@
     </bean>
 	
 	<bean id="localeResolver" class="info.cangshudoudou.msgbox.springmvc.MsgboxSessionLocaleResolver">
-	    <property name="defaultLocale" value="en"/>
+	    <property name="defaultLocale" value="zh"/>
 	</bean>
     
     <bean name="sessionData" class="info.cangshudoudou.msgbox.springmvc.SessionData" scope="session">
