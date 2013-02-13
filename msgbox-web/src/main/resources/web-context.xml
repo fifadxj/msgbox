@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    http://www.springframework.org/schema/util 
+    http://www.springframework.org/schema/util/spring-util-3.0.xsd
+    "
+	default-autowire="no" default-lazy-init="false">
+
+	<!-- <context:component-scan base-package="info.cangshudoudou.msgbox.springmvc.controller" /> -->
+	<!-- <mvc:annotation-driven/> -->
+	<!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />-->
+	
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<bean id="handlerExceptionResolver" class="info.cangshudoudou.msgbox.springmvc.HandlerExceptionResolverImpl">
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/labels</value>
+				<value>/WEB-INF/messages</value>
+			</list>
+		</property>
+		<property name="useCodeAsDefaultMessage" value="true" />
+		<property name="cacheSeconds" value="1" />
+		<property name="defaultEncoding" value="UTF-8" />
+    </bean>
+	
+	<bean id="localeResolver" class="info.cangshudoudou.msgbox.springmvc.MsgboxSessionLocaleResolver">
+	    <property name="defaultLocale" value="en"/>
+	</bean>
+    
+    <bean name="sessionData" class="info.cangshudoudou.msgbox.springmvc.SessionData" scope="session">
+        <aop:scoped-proxy />
+    </bean>
+    
+    <!-- <bean id="handlerMapping" class="info.cangshudoudou.msgbox.springmvc.MsgboxControllerBeanNameHandlerMapping">
+        <property name="urlPrefix" value="/" />
+        <property name="urlSuffix" value=".html" />
+        <property name="clearWord" value="Controller" />
+        
+        <property name="interceptors">
+            <list>
+            <ref bean="authenticationInterceptor"/>
+            </list>
+        </property>
+    </bean> -->
+    
+    <bean name="authenticationInterceptor" class="info.cangshudoudou.msgbox.springmvc.AuthenticationInterceptor">
+        <property name="sessionData" ref="sessionData" />
+        <property name="secureUrls">
+            <list>
+                <value>/security/loginForm.html</value>
+                <value>/security/loginSubmit.html</value>
+                <value>/common/language.html</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="handlerMapping" class="info.cangshudoudou.msgbox.springmvc.MsgboxSimpleUrlHandlerMapping">
+        <property name="methodNameResolver" ref="methodNameResolver" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".html" />
+        
+        <property name="interceptors">
+            <list>
+                <ref bean="authenticationInterceptor"/>
+            </list>
+        </property>
+
+		<property name="urlMap">
+			<map>
+			    <entry key="/home" value="homeController" />
+			    <entry key="/common/language" value="commonController.language" />
+			
+			    <entry key="/security/loginForm" value="securityController.loginForm" />
+			    <entry key="/security/loginSubmit" value="securityController.loginSubmit" />
+			    <entry key="/security/logout" value="securityController.loginForm" />
+			
+				<entry key="/category/list" value="categoryController.list" />
+				<entry key="/category/view" value="categoryController.view" />
+				<entry key="/category/delete" value="categoryController.delete" />
+				<entry key="/category/createForm" value="categoryController.createForm" />
+				<entry key="/category/createSubmit" value="categoryController.createSubmit" />
+				<entry key="/category/editForm" value="categoryController.editForm" />
+				<entry key="/category/editSubmit" value="categoryController.editSubmit" />
+				
+                <entry key="/message/list" value="messageController.list" />
+                <entry key="/message/view" value="messageController.view" />
+                <entry key="/message/delete" value="messageController.delete" />
+                <entry key="/message/createForm" value="messageController.createForm" />
+                <entry key="/message/createSubmit" value="messageController.createSubmit" />
+                <entry key="/message/editForm" value="messageController.editForm" />
+                <entry key="/message/editSubmit" value="messageController.editSubmit" />
+                <entry key="/message/top" value="messageController.top" />
+                <entry key="/message/untop" value="messageController.untop" />
+                <entry key="/message/enable" value="messageController.enable" />
+                <entry key="/message/disable" value="messageController.disable" />
+                
+			</map>
+		</property>
+    </bean>
+
+    <bean id="methodNameResolver" class="info.cangshudoudou.msgbox.springmvc.MsgboxUrlMethodNameResolver">
+        <property name="alwaysUseFullPath" value="false" />
+        <property name="defaultMethodName" value="handleRequest" />
+    </bean>
+
+	<bean id="baseMsgboxController" abstract="true">
+		<property name="methodNameResolver" ref="methodNameResolver" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="messageService" ref="messageService" />
+	</bean>
+	
+	<bean name="categoryController" class="info.cangshudoudou.msgbox.springmvc.controller.CategoryController" parent="baseMsgboxController" scope="prototype" />
+	<bean name="messageController" class="info.cangshudoudou.msgbox.springmvc.controller.MessageController" parent="baseMsgboxController" scope="prototype" />
+	<bean name="commonController" class="info.cangshudoudou.msgbox.springmvc.controller.CommonController" parent="baseMsgboxController" scope="prototype">
+	    <property name="localeResolver" ref="localeResolver" />
+	</bean>
+	<bean name="securityController" class="info.cangshudoudou.msgbox.springmvc.controller.SecurityController" parent="baseMsgboxController" scope="prototype">
+        <property name="sessionData" ref="sessionData" />
+        <property name="localeResolver" ref="localeResolver" />
+    </bean>
+	<bean name="homeController" class="info.cangshudoudou.msgbox.springmvc.controller.HomeController" scope="prototype" />
+	
+</beans>

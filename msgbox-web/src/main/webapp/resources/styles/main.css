@@ -1,0 +1,29 @@
+#main {
+  width: 100%;
+}
+
+#leftNav {
+  width: 15%;
+  float: left;
+  background-color: #F5F7A6
+}
+
+#rightNav {
+  width: 15%;
+  float: right;
+  background-color: #F5F7A6
+}
+
+#content {
+  width: 70%;
+  float: left;
+  background-color: #D3EDED
+}
+
+#header {
+  background-color: #F1C6F5
+}
+
+#footer {
+  background-color: #F1C6F5
+}

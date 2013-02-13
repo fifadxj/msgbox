@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="msgbox" default="schemaexport" basedir=".">
+	<path id="lib.classpath">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement location="target/classes" />
+	</path>
+
+	<target name="schemaexport">
+		<taskdef name="schemaexport" classname="org.hibernate.tool.hbm2ddl.SchemaExportTask" classpathref="lib.classpath" />
+
+		<schemaexport config="src/main/resources/hibernate.cfg.xml" quiet="no" text="yes" drop="no" delimiter=";" output="sql.sql">
+
+		</schemaexport>
+	</target>
+
+</project>
