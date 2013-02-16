@@ -222,6 +222,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> listMessages(MessageFilterCondition condition, Pagination pagination) {
+    	if (condition == null) {
+    		throw new IllegalArgumentException();
+    	}
         List<Message> messages = messageDao.listMessages(condition, pagination);
         
         return messages;

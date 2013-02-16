@@ -1,24 +1,24 @@
 package info.cangshudoudou.msgbox.springmvc;
 
+import info.cangshudoudou.msgbox.utils.SessionData;
+
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Method;
 import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MethodNameResolver;
-import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 import org.springframework.web.util.UrlPathHelper;
 
 public class AuthenticationInterceptor implements HandlerInterceptor {
     private SessionData sessionData;
 
     private List<String> secureUrls;
+    
+    private Boolean requireLogin;
 
     public void setSessionData(SessionData sessionData) {
         this.sessionData = sessionData;
@@ -27,6 +27,10 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     public void setSecureUrls(List<String> secureUrls) {
         this.secureUrls = secureUrls;
     }
+
+	public void setRequireLogin(Boolean requireLogin) {
+		this.requireLogin = requireLogin;
+	}
 
     private String getTargetUrl(HttpServletRequest request) throws UnsupportedEncodingException {
         String path = request.getRequestURL().toString();
@@ -44,7 +48,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
         UrlPathHelper urlPathHelper = new UrlPathHelper();
         String lookupPath = urlPathHelper.getLookupPathForRequest(request);
-        if (secureUrls.contains(lookupPath)) {
+        if (! requireLogin || secureUrls.contains(lookupPath)) {
             return true;
         }
 

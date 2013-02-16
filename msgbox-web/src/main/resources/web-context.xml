@@ -19,10 +19,11 @@
     "
 	default-autowire="no" default-lazy-init="false">
 
+    <context:property-placeholder location="classpath:msgbox.properties" />
+
 	<!-- <context:component-scan base-package="info.cangshudoudou.msgbox.springmvc.controller" /> -->
 	<!-- <mvc:annotation-driven/> -->
 	<!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />-->
-	
 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
@@ -49,7 +50,7 @@
 	    <property name="defaultLocale" value="zh"/>
 	</bean>
     
-    <bean name="sessionData" class="info.cangshudoudou.msgbox.springmvc.SessionData" scope="session">
+    <bean name="sessionData" class="info.cangshudoudou.msgbox.utils.SessionData" scope="session">
         <aop:scoped-proxy />
     </bean>
     
@@ -74,6 +75,7 @@
                 <value>/common/language.html</value>
             </list>
         </property>
+        <property name="requireLogin" value="${login.required}" />
     </bean>
     
     <bean id="handlerMapping" class="info.cangshudoudou.msgbox.springmvc.MsgboxSimpleUrlHandlerMapping">
@@ -94,7 +96,7 @@
 			
 			    <entry key="/security/loginForm" value="securityController.loginForm" />
 			    <entry key="/security/loginSubmit" value="securityController.loginSubmit" />
-			    <entry key="/security/logout" value="securityController.loginForm" />
+			    <entry key="/security/logout" value="securityController.logout" />
 			
 				<entry key="/category/list" value="categoryController.list" />
 				<entry key="/category/view" value="categoryController.view" />

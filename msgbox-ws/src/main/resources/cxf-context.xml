@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+    xmlns:jaxws="http://cxf.apache.org/jaxws" 
+    xmlns:cxf="http://cxf.apache.org/core"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    http://www.springframework.org/schema/util 
+    http://www.springframework.org/schema/util/spring-util-3.0.xsd
+    http://cxf.apache.org/jaxws
+    http://cxf.apache.org/schemas/jaxws.xsd
+    http://cxf.apache.org/jaxrs
+    http://cxf.apache.org/schemas/jaxrs.xsd
+    http://cxf.apache.org/core
+    http://cxf.apache.org/schemas/core.xsd
+    "
+    default-autowire="no" default-lazy-init="false">
+    
+    <util:properties id="msgboxConfiguration" location="classpath:msgbox.properties"/>
+    
+	<jaxrs:server address="/">
+		<jaxrs:inInterceptors>
+			<ref bean="AuthenticationInterceptor" />
+		</jaxrs:inInterceptors>
+		<jaxrs:outInterceptors>
+		</jaxrs:outInterceptors>
+		<jaxrs:outFaultInterceptors>
+			<ref bean="faultInterceptor" />
+		</jaxrs:outFaultInterceptors>
+		<jaxrs:serviceBeans>
+			<ref bean="messageEndpoint" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+	</jaxrs:server>
+
+	<bean id="AuthenticationInterceptor"
+		class="info.cangshudoudou.msgbox.ws.cxf.AuthenticationInterceptor">
+		<property name="sessionData" ref="sessionData" />
+		<property name="secureUrls">
+			<list>
+				<value>/security/login</value>
+				<value>/security/logout</value>
+				<value>/message/list</value>
+			</list>
+		</property>
+
+		<property name="msgboxConfiguration" ref="msgboxConfiguration" />
+	</bean>
+
+	<bean name="sessionData" class="info.cangshudoudou.msgbox.utils.SessionData"
+		scope="session">
+		<aop:scoped-proxy />
+	</bean>
+
+	<bean id="faultInterceptor" class="info.cangshudoudou.msgbox.ws.cxf.FaultInterceptor">
+	</bean>
+
+	<bean id="messageEndpoint" class="info.cangshudoudou.msgbox.ws.endpoint.impl.MessageEndpointImpl">
+		<!-- <property name="categoryService" ref="categoryService" /> -->
+        <property name="messageService" ref="messageService" />
+	</bean>
+
+	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider">
+		<property name="mapper" ref="jacksonMapper" />
+	</bean>
+	<bean id="jacksonMapper" class="org.codehaus.jackson.map.ObjectMapper">
+		<property name="serializationConfig.dateFormat">
+			<bean class="java.text.SimpleDateFormat">
+				<constructor-arg value="yyyy-MM-dd'T'HH:mm:ss.SSSZ" />
+			</bean>
+		</property>
+	</bean>
+</beans>

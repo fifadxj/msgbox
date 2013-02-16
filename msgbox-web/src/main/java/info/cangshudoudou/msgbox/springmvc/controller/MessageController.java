@@ -23,6 +23,9 @@ public class MessageController extends BaseMsgboxController {
 
         ModelAndView result = new ModelAndView("/message/list");
 
+        if (condition.getDisabled() == null) {
+        	condition.setDisabled(false);
+        }
         result.addObject("condition", condition);
         
         List<Category> categories = categoryService.listCategories();

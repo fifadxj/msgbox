@@ -1,6 +1,9 @@
 package info.cangshudoudou.msgbox.utils;
 
 public class ErrorCodeConstants {
+    public static final String ERR_UNKNOW_EXCEPTION = "ERR_UNKNOW_EXCEPTION";
+    public static final String ERR_INVALID_REQUEST_FORMAT = "ERR_INVALID_REQUEST_FORMAT";
+    
     public static final String ERR_CATEGORY_NAME_REQUIRED = "ERR_CATEGORY_NAME_REQUIRED";
     public static final String ERR_CATEGORY_NAME_TOO_LONG = "ERR_CATEGORY_NAME_TOO_LONG";
     public static final String ERR_CATEGORY_DESCRIPTION_TOO_LONG = "ERR_CATEGORY_DESCRIPTION_TOO_LONG";
@@ -18,4 +21,9 @@ public class ErrorCodeConstants {
     public static final String ERR_MESSAGE_NOT_EXISTED = "ERR_MESSAGE_NOT_EXISTED";
     public static final String ERR_MESSAGE_ALREADY_DISABLED = "ERR_MESSAGE_ALREADY_DISABLED";
     public static final String ERR_MESSAGE_ALREADY_ENABLED = "ERR_MESSAGE_ALREADY_ENABLED";
+    
+    
+    public static final String ERR_USER_NOT_LOGIN = "ERR_USER_NOT_LOGIN";
+    
+
 }

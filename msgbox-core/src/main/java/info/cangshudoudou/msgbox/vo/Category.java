@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name="CATEGORIES")
 //@SequenceGenerator(name="idGen", sequenceName="CATEGORY_SEQUENCE", initialValue=1, allocationSize=1)
@@ -38,12 +40,14 @@ public class Category {
     
     //@Transient
     @OneToMany(mappedBy="parent", fetch=FetchType.LAZY)
+    @JsonIgnore
     Set<Category> children = new HashSet<Category>();
     
     @Transient
     Boolean deletable;
     
     @Transient
+    @JsonIgnore
     String parentId;
     
     public String getParentId() {

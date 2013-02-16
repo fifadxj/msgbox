@@ -1,4 +1,4 @@
-package info.cangshudoudou.msgbox.springmvc;
+package info.cangshudoudou.msgbox.utils;
 
 public class SessionData {
     private String langugage;

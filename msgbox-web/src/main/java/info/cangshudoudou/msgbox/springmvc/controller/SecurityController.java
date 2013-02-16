@@ -1,10 +1,10 @@
 package info.cangshudoudou.msgbox.springmvc.controller;
 
-import java.util.Locale;
-
 import info.cangshudoudou.msgbox.springmvc.MsgboxSessionLocaleResolver;
-import info.cangshudoudou.msgbox.springmvc.SessionData;
+import info.cangshudoudou.msgbox.utils.SessionData;
 import info.cangshudoudou.msgbox.vo.User;
+
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 public class SecurityController extends BaseMsgboxController {
     private SessionData sessionData;

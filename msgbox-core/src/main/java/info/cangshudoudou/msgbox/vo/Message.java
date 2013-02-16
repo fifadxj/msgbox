@@ -17,6 +17,7 @@ import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Index;
 
 @Entity
@@ -56,6 +57,7 @@ public class Message {
     
     @ManyToOne(optional=false)
     @JoinColumn(name="CATEGORY_ID")
+    @JsonIgnore
     Category category;
     
 //    @OneToMany(mappedBy="message")

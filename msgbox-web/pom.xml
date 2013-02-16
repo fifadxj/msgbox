@@ -18,7 +18,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+        <org.springframework.version>3.2.1.RELEASE</org.springframework.version>
     </properties>
 
 	<dependencies>
@@ -30,6 +30,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
+			<scope>compile</scope>
 			<version>2.5</version>
 		</dependency>
         <dependency>
@@ -62,18 +63,6 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-
-        <!--
-            Spring MVC for Portlet Environments (depends on spring-core,
-            spring-beans, spring-context, spring-web) Define this if you use
-            Spring MVC with a Portlet Container
-            (org.springframework.web.portlet.*)
-        -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc-portlet</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
 		
 		<dependency>
 		    <groupId>taglibs</groupId>
@@ -98,6 +87,9 @@
 		    <artifactId>commons-lang</artifactId>
 		    <version>2.3</version>
 		</dependency>
+		
 	</dependencies>
-
+    <build>
+        <finalName>msgbox</finalName>
+    </build>
 </project>

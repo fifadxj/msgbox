@@ -48,7 +48,7 @@
 	  <!-- End #logn-top -->
 	  <div id="login-content">
 	    <form:form action="${contextPath}/web/security/loginSubmit.html" method="post" id="_form" modelAttribute="user">
-	      <input name="goto" value="${param.goto}" type="hidden" />
+	      <input name="goto" value="${param['goto']}" type="hidden" />
 	      <div class="notification">
           <c:if test="${errorcode != null}">
             <img src="resources/images/icons/cross_circle.png" /><span class="error"><spring:message code="${errorcode}" /></span>

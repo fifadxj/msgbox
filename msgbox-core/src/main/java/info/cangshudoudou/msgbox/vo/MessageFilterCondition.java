@@ -2,7 +2,7 @@ package info.cangshudoudou.msgbox.vo;
 
 public class MessageFilterCondition {
     private Long categoryId;
-    private Boolean disabled = false;
+    private Boolean disabled;
     private Boolean top;
     public Boolean getTop() {
         return top;

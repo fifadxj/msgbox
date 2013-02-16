@@ -9,5 +9,6 @@
   <modules>
     <module>msgbox-core</module>
     <module>msgbox-web</module>
+    <module>msgbox-ws</module>
   </modules>
 </project>
