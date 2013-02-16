@@ -39,7 +39,7 @@
             <td><spring:message code="message.content" /></td>
           </tr>
           <tr>
-            <td>${message.content}</td>
+            <td><pre>${message.content}</pre></td>
           </tr>
       </table>
   </div>

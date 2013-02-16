@@ -48,7 +48,7 @@
             <td><spring:message code="category.description" /></td>
           </tr>
           <tr>
-            <td>${category.description}</td>
+            <td><pre>${category.description}</pre></td>
           </tr>
       </table>
   </div>
