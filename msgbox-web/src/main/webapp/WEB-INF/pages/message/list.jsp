@@ -38,8 +38,8 @@
             <th style="width:50%"><spring:message code="message.content" /></th>
             <th style="width:15%"><spring:message code="message.category.name" /></th>
             <th style="width:10%"><spring:message code="message.rank" /></th>
-            <th style="width:15%"><spring:message code="message.source" /></th>
-            <th style="width:10%"><spring:message code="message.operation" /></th>
+            <th style="width:10%"><spring:message code="message.source" /></th>
+            <th style="width:15%"><spring:message code="message.operation" /></th>
           </tr>
         </thead>
         <tbody>

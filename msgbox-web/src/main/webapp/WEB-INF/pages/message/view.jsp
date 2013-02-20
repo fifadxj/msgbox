@@ -39,7 +39,7 @@
             <td><spring:message code="message.content" /></td>
           </tr>
           <tr>
-            <td><pre><str:wordWrap width ="100" delimiter="<br/>">${message.content}</str:wordWrap></pre></td>
+            <td><pre><str:wordWrap width ="50" delimiter="<br/>">${message.content}</str:wordWrap></pre></td>
           </tr>
       </table>
   </div>

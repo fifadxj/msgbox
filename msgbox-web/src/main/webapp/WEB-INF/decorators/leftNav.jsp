@@ -11,7 +11,7 @@
 <spring:url value="/web/home.html" var="home" htmlEscape="true" />
 
 <div id="sidebar-wrapper">
-  <a href="http://www.865171.cn"><img id="logo" src="resources/images/logo.jpg" width="180px" height="180px" /></a>
+  <a href="http://www.865171.cn"><img id="logo" src="${pageContext.request.contextPath}/resources/images/logo.jpg" width="180px" height="180px" /></a>
   <ul id="main-nav">
     <li> 
       <a href="${home}" class="nav-top-item no-submenu ${fn:contains(pageContext.request.requestURI, '/web/home.html') ? 'current' : ''}"><spring:message code="navigation.menu.home" /></a>

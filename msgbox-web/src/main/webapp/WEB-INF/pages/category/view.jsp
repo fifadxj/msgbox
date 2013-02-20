@@ -48,7 +48,7 @@
             <td><spring:message code="category.description" /></td>
           </tr>
           <tr>
-            <td><pre><str:wordWrap width ="100" delimiter="<br/>">${category.description}</str:wordWrap></pre></td>
+            <td><pre><str:wordWrap width ="50" delimiter="<br/>">${category.description}</str:wordWrap></pre></td>
           </tr>
       </table>
   </div>
