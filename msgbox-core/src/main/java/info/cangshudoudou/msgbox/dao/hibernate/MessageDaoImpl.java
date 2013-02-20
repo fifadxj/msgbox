@@ -1,20 +1,18 @@
 package info.cangshudoudou.msgbox.dao.hibernate;
 
+import info.cangshudoudou.msgbox.dao.MessageDao;
+import info.cangshudoudou.msgbox.vo.Message;
+import info.cangshudoudou.msgbox.vo.MessageFilterCondition;
+import info.cangshudoudou.msgbox.vo.Pagination;
+
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.util.StringUtils;
-
-import info.cangshudoudou.msgbox.dao.MessageDao;
-import info.cangshudoudou.msgbox.vo.Category;
-import info.cangshudoudou.msgbox.vo.Message;
-import info.cangshudoudou.msgbox.vo.MessageFilterCondition;
-import info.cangshudoudou.msgbox.vo.Pagination;
 
 public class MessageDaoImpl extends DaoSupport implements MessageDao {
 
@@ -55,7 +53,7 @@ public class MessageDaoImpl extends DaoSupport implements MessageDao {
 //        query.setBoolean("disabled", true);
 //        List<Message> messages = (List<Message>) query.list();
         
-        Criteria criteria = getCurrentSession().createCriteria(Message.class);
+        Criteria criteria = getCurrentSession().createCriteria(Message.class, "m");
         if (condition.getDisabled() != null) {
             criteria.add(Restrictions.eq("disabled", condition.getDisabled()));
         }
@@ -65,7 +63,10 @@ public class MessageDaoImpl extends DaoSupport implements MessageDao {
         }
         
         if (condition.getCategoryId() != null && ! condition.getCategoryId().equals(-1L)) {
-            criteria.createCriteria("category").add(Restrictions.eq("id", condition.getCategoryId()));
+            criteria.createCriteria("category", "c").add(Restrictions.eqProperty("m.category.id", "c.id"));
+            Criterion belongToParentCategory = Restrictions.eq("c.parent.id", condition.getCategoryId());
+            Criterion belongToThisCategory = Restrictions.eq("m.category.id", condition.getCategoryId());
+            criteria.add(Restrictions.or(belongToParentCategory, belongToThisCategory));
         }
 
         criteria.addOrder(Order.desc("rank"));

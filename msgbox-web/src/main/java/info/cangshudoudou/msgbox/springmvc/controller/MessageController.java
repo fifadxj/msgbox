@@ -28,9 +28,6 @@ public class MessageController extends BaseMsgboxController {
         }
         result.addObject("condition", condition);
         
-        List<Category> categories = categoryService.listCategories();
-        result.addObject("categories", categories);
-        
         List<Message> messages = messageService.listMessages(condition, null);
         List<Message> toped = new ArrayList<Message>();
         List<Message> untoped = new ArrayList<Message>();
@@ -45,6 +42,8 @@ public class MessageController extends BaseMsgboxController {
         result.addObject("topedMessages", toped);
         result.addObject("untopedMessages", untoped);
         
+        List<Category> categories = categoryService.listCategories();
+        result.addObject("categories", categories);
         
         return result;
     }
