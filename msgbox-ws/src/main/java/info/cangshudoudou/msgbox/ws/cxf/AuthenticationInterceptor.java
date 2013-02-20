@@ -3,11 +3,11 @@ package info.cangshudoudou.msgbox.ws.cxf;
 import info.cangshudoudou.msgbox.utils.ErrorCodeConstants;
 import info.cangshudoudou.msgbox.utils.SessionData;
 import info.cangshudoudou.msgbox.ws.WsException;
+import info.cangshudoudou.msgbox.ws.utils.WsConstants;
 import info.cangshudoudou.msgbox.ws.utils.WsUtils;
 import info.cangshudoudou.msgbox.ws.vo.BaseRequest;
 
 import java.util.List;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +16,8 @@ import org.apache.cxf.message.Message;
 import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
 import org.apache.cxf.transport.http.AbstractHTTPDestination;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.UrlPathHelper;
@@ -31,7 +33,7 @@ public class AuthenticationInterceptor extends AbstractPhaseInterceptor<Message>
     public void setRequireLogin(Boolean requireLogin) {
         this.requireLogin = requireLogin;
     }
-    
+
     public void setSessionData(SessionData sessionData) {
         this.sessionData = sessionData;
     }
@@ -62,12 +64,12 @@ public class AuthenticationInterceptor extends AbstractPhaseInterceptor<Message>
 
             UrlPathHelper urlPathHelper = new UrlPathHelper();
             String lookupPath = urlPathHelper.getLookupPathForRequest(httpRequest);
-            if (! requireLogin || secureUrls.contains(lookupPath)) {
+            if (!requireLogin || secureUrls.contains(lookupPath)) {
                 return;
             }
 
             if (sessionData.getAuthenticated() == null) {
-                throw WsUtils.toFault(new WsException(ErrorCodeConstants.ERR_USER_NOT_LOGIN));
+                throw new WsException(ErrorCodeConstants.ERR_USER_NOT_LOGIN);
             }
         } catch (Exception e) {
             throw WsUtils.toFault(e);

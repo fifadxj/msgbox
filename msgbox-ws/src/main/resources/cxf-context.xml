@@ -52,7 +52,7 @@
 			<list>
 				<value>/security/login</value>
 				<value>/security/logout</value>
-				<value>/message/list</value>
+				<!-- <value>/message/list</value> -->
 			</list>
 		</property>
 

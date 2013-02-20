@@ -2,10 +2,16 @@
 
 <configuration scan="true" scanPeriod="30 seconds">
 
-	<property name="log.dir" value="${catalina.home}/msgbox-logs" />
+	<property name="log.dir" value="${catalina.home}/logs/msgbox" />
 	<property name="log.level" value="debug" />
 
-<!--     <appender name="systemOutAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="systemOutAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%c{0}] -%m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="systemOut2FileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.dir}/systemOut.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.dir}/systemOut.log.%d{yyyy-MM-dd}.%i.gz
@@ -16,12 +22,6 @@
         </rollingPolicy>
         <encoder>
             <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%c{0}] -%m%n</Pattern>
-        </encoder>
-    </appender> -->
-    
-    <appender name="systemOutAppender" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%c{0}] -%m%n</pattern>
         </encoder>
     </appender>
     
@@ -35,21 +35,36 @@
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%c{0}] -%m%n</Pattern>
 		</encoder>
 	</appender>
+	
+	<appender name="wsExceptionAppender"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/exception.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.dir}/exception.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%c{0}] -%m%n</Pattern>
+        </encoder>
+    </appender>
 
-	<root level="DEBUG">
-		<appender-ref ref="systemOutAppender" />
+	<root level="${log.level}">
+		<appender-ref ref="systemOut2FileAppender" />
 	</root>
 
 	<logger name="org.dozer" additivity="false" level="OFF">
 		<appender-ref ref="dailyAppender" />
 	</logger>
 
-	<logger name="org.apache.cxf" additivity="false" level="${log.level}">
+	<logger name="org.apache.cxf" additivity="false" level="OFF">
 		<appender-ref ref="dailyAppender" />
 	</logger>
 
 	<logger name="daily" additivity="false" level="${log.level}">
 		<appender-ref ref="dailyAppender" />
 	</logger>
+	
+	<logger name="wsException" additivity="false" level="${log.level}">
+        <appender-ref ref="wsExceptionAppender" />
+    </logger>
 
 </configuration>

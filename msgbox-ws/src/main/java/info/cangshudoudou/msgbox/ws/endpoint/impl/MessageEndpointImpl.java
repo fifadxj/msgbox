@@ -39,7 +39,6 @@ public class MessageEndpointImpl implements MessageEndpoint {
             List<Message> messages = messageService.listMessages(request.getCondition(), null);
 
             response.setMessages(messages);
-           
 
         return response;
     }
