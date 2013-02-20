@@ -28,8 +28,6 @@
     "
     default-autowire="no" default-lazy-init="false">
     
-    <util:properties id="msgboxConfiguration" location="classpath:msgbox.properties"/>
-    
 	<jaxrs:server address="/">
 		<jaxrs:inInterceptors>
 			<ref bean="AuthenticationInterceptor" />
@@ -58,7 +56,7 @@
 			</list>
 		</property>
 
-		<property name="msgboxConfiguration" ref="msgboxConfiguration" />
+		<property name="requireLogin" value="${login.required}" />
 	</bean>
 
 	<bean name="sessionData" class="info.cangshudoudou.msgbox.utils.SessionData"

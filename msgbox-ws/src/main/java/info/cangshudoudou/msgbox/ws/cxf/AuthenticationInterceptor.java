@@ -26,12 +26,12 @@ public class AuthenticationInterceptor extends AbstractPhaseInterceptor<Message>
 
     private List<String> secureUrls;
 
-    private Properties msgboxConfiguration;
+    private Boolean requireLogin;
 
-    public void setMsgboxConfiguration(Properties msgboxConfiguration) {
-        this.msgboxConfiguration = msgboxConfiguration;
+    public void setRequireLogin(Boolean requireLogin) {
+        this.requireLogin = requireLogin;
     }
-
+    
     public void setSessionData(SessionData sessionData) {
         this.sessionData = sessionData;
     }
@@ -62,8 +62,7 @@ public class AuthenticationInterceptor extends AbstractPhaseInterceptor<Message>
 
             UrlPathHelper urlPathHelper = new UrlPathHelper();
             String lookupPath = urlPathHelper.getLookupPathForRequest(httpRequest);
-            String requireLogin = (String) msgboxConfiguration.get("login.required");
-            if ("false".equals(requireLogin) || secureUrls.contains(lookupPath)) {
+            if (! requireLogin || secureUrls.contains(lookupPath)) {
                 return;
             }
 

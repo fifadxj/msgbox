@@ -2,8 +2,8 @@
 
 <configuration scan="true" scanPeriod="30 seconds">
 
-	<!-- <property name="log.dir" value="c:/log" /> -->
-	<!-- <property name="log.level" value="debug" /> -->
+	<property name="log.dir" value="${catalina.home}/msgbox-logs" />
+	<property name="log.level" value="debug" />
 
 <!--     <appender name="systemOutAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.dir}/systemOut.log</file>
