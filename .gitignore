@@ -4,3 +4,7 @@ target/
 .settings/
 .classpath
 .project
+
+#ignore during dev
+msgbox.properties
+jdbc.properties
