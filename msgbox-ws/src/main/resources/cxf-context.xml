@@ -28,6 +28,14 @@
     "
     default-autowire="no" default-lazy-init="false">
     
+    <bean id="msgboxPSPC" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:msgbox.properties</value>
+            </list>
+        </property>
+    </bean>
+    
 	<jaxrs:server address="/">
 		<jaxrs:inInterceptors>
 			<ref bean="AuthenticationInterceptor" />
