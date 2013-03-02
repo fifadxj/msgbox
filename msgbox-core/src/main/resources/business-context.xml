@@ -46,23 +46,23 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
-    <bean id="categoryService" class="info.cangshudoudou.msgbox.service.impl.CategoryServiceImpl">
+    <bean id="categoryService" class="com.cangshudoudou.msgbox.service.impl.CategoryServiceImpl">
         <property name="messageDao" ref="messageDao" />
         <property name="categoryDao" ref="categoryDao" />
     </bean>
     
-    <bean id="messageService" class="info.cangshudoudou.msgbox.service.impl.MessageServiceImpl">
+    <bean id="messageService" class="com.cangshudoudou.msgbox.service.impl.MessageServiceImpl">
         <property name="messageDao" ref="messageDao" />
         <property name="categoryDao" ref="categoryDao" />
     </bean>
     
-    <bean id="parentDao" class="info.cangshudoudou.msgbox.dao.hibernate.DaoSupport" abstract="true">
+    <bean id="parentDao" class="com.cangshudoudou.msgbox.dao.hibernate.DaoSupport" abstract="true">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 	
-	<bean id="categoryDao" class="info.cangshudoudou.msgbox.dao.hibernate.CategoryDaoImpl" parent="parentDao">
+	<bean id="categoryDao" class="com.cangshudoudou.msgbox.dao.hibernate.CategoryDaoImpl" parent="parentDao">
 	</bean>
 	
-	<bean id="messageDao" class="info.cangshudoudou.msgbox.dao.hibernate.MessageDaoImpl" parent="parentDao">
+	<bean id="messageDao" class="com.cangshudoudou.msgbox.dao.hibernate.MessageDaoImpl" parent="parentDao">
     </bean>
 </beans>

@@ -54,7 +54,7 @@
 	</jaxrs:server>
 
 	<bean id="AuthenticationInterceptor"
-		class="info.cangshudoudou.msgbox.ws.cxf.AuthenticationInterceptor">
+		class="com.cangshudoudou.msgbox.ws.cxf.AuthenticationInterceptor">
 		<property name="sessionData" ref="sessionData" />
 		<property name="secureUrls">
 			<list>
@@ -67,15 +67,15 @@
 		<property name="requireLogin" value="${login.required}" />
 	</bean>
 
-	<bean name="sessionData" class="info.cangshudoudou.msgbox.utils.SessionData"
+	<bean name="sessionData" class="com.cangshudoudou.msgbox.utils.SessionData"
 		scope="session">
 		<aop:scoped-proxy />
 	</bean>
 
-	<bean id="faultInterceptor" class="info.cangshudoudou.msgbox.ws.cxf.FaultInterceptor">
+	<bean id="faultInterceptor" class="com.cangshudoudou.msgbox.ws.cxf.FaultInterceptor">
 	</bean>
 
-	<bean id="messageEndpoint" class="info.cangshudoudou.msgbox.ws.endpoint.impl.MessageEndpointImpl">
+	<bean id="messageEndpoint" class="com.cangshudoudou.msgbox.ws.endpoint.impl.MessageEndpointImpl">
 		<!-- <property name="categoryService" ref="categoryService" /> -->
         <property name="messageService" ref="messageService" />
 	</bean>

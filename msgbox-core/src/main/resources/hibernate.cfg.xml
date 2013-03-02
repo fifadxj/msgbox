@@ -24,9 +24,9 @@
         <property name="hibernate.generate_statistics">true</property>
         <property name="hibernate.id.new_generator_mappings">true</property>
         
-        <mapping class="info.cangshudoudou.msgbox.vo.Message" />
-        <mapping class="info.cangshudoudou.msgbox.vo.Category" />
-        <!-- <mapping class="info.cangshudoudou.msgbox.Comment" /> -->
+        <mapping class="com.cangshudoudou.msgbox.vo.Message" />
+        <mapping class="com.cangshudoudou.msgbox.vo.Category" />
+        <!-- <mapping class="com.cangshudoudou.msgbox.Comment" /> -->
         
  
     </session-factory>

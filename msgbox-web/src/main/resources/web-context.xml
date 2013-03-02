@@ -19,7 +19,7 @@
     "
 	default-autowire="no" default-lazy-init="false">
 
-	<!-- <context:component-scan base-package="info.cangshudoudou.msgbox.springmvc.controller" /> -->
+	<!-- <context:component-scan base-package="com.cangshudoudou.msgbox.springmvc.controller" /> -->
 	<!-- <mvc:annotation-driven/> -->
 	<!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />-->
 	
@@ -37,7 +37,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<bean id="handlerExceptionResolver" class="info.cangshudoudou.msgbox.springmvc.HandlerExceptionResolverImpl">
+	<bean id="handlerExceptionResolver" class="com.cangshudoudou.msgbox.springmvc.HandlerExceptionResolverImpl">
 	</bean>
 	
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -52,15 +52,15 @@
 		<property name="defaultEncoding" value="UTF-8" />
     </bean>
 	
-	<bean id="localeResolver" class="info.cangshudoudou.msgbox.springmvc.MsgboxSessionLocaleResolver">
+	<bean id="localeResolver" class="com.cangshudoudou.msgbox.springmvc.MsgboxSessionLocaleResolver">
 	    <property name="defaultLocale" value="zh"/>
 	</bean>
     
-    <bean name="sessionData" class="info.cangshudoudou.msgbox.utils.SessionData" scope="session">
+    <bean name="sessionData" class="com.cangshudoudou.msgbox.utils.SessionData" scope="session">
         <aop:scoped-proxy />
     </bean>
     
-    <!-- <bean id="handlerMapping" class="info.cangshudoudou.msgbox.springmvc.MsgboxControllerBeanNameHandlerMapping">
+    <!-- <bean id="handlerMapping" class="com.cangshudoudou.msgbox.springmvc.MsgboxControllerBeanNameHandlerMapping">
         <property name="urlPrefix" value="/" />
         <property name="urlSuffix" value=".html" />
         <property name="clearWord" value="Controller" />
@@ -72,7 +72,7 @@
         </property>
     </bean> -->
     
-    <bean name="authenticationInterceptor" class="info.cangshudoudou.msgbox.springmvc.AuthenticationInterceptor">
+    <bean name="authenticationInterceptor" class="com.cangshudoudou.msgbox.springmvc.AuthenticationInterceptor">
         <property name="sessionData" ref="sessionData" />
         <property name="secureUrls">
             <list>
@@ -84,7 +84,7 @@
         <property name="requireLogin" value="${login.required}" />
     </bean>
     
-    <bean id="handlerMapping" class="info.cangshudoudou.msgbox.springmvc.MsgboxSimpleUrlHandlerMapping">
+    <bean id="handlerMapping" class="com.cangshudoudou.msgbox.springmvc.MsgboxSimpleUrlHandlerMapping">
         <property name="methodNameResolver" ref="methodNameResolver" />
         <property name="prefix" value="" />
         <property name="suffix" value=".html" />
@@ -128,7 +128,7 @@
 		</property>
     </bean>
 
-    <bean id="methodNameResolver" class="info.cangshudoudou.msgbox.springmvc.MsgboxUrlMethodNameResolver">
+    <bean id="methodNameResolver" class="com.cangshudoudou.msgbox.springmvc.MsgboxUrlMethodNameResolver">
         <property name="alwaysUseFullPath" value="false" />
         <property name="defaultMethodName" value="handleRequest" />
     </bean>
@@ -139,15 +139,15 @@
 		<property name="messageService" ref="messageService" />
 	</bean>
 	
-	<bean name="categoryController" class="info.cangshudoudou.msgbox.springmvc.controller.CategoryController" parent="baseMsgboxController" scope="prototype" />
-	<bean name="messageController" class="info.cangshudoudou.msgbox.springmvc.controller.MessageController" parent="baseMsgboxController" scope="prototype" />
-	<bean name="commonController" class="info.cangshudoudou.msgbox.springmvc.controller.CommonController" parent="baseMsgboxController" scope="prototype">
+	<bean name="categoryController" class="com.cangshudoudou.msgbox.springmvc.controller.CategoryController" parent="baseMsgboxController" scope="prototype" />
+	<bean name="messageController" class="com.cangshudoudou.msgbox.springmvc.controller.MessageController" parent="baseMsgboxController" scope="prototype" />
+	<bean name="commonController" class="com.cangshudoudou.msgbox.springmvc.controller.CommonController" parent="baseMsgboxController" scope="prototype">
 	    <property name="localeResolver" ref="localeResolver" />
 	</bean>
-	<bean name="securityController" class="info.cangshudoudou.msgbox.springmvc.controller.SecurityController" parent="baseMsgboxController" scope="prototype">
+	<bean name="securityController" class="com.cangshudoudou.msgbox.springmvc.controller.SecurityController" parent="baseMsgboxController" scope="prototype">
         <property name="sessionData" ref="sessionData" />
         <property name="localeResolver" ref="localeResolver" />
     </bean>
-	<bean name="homeController" class="info.cangshudoudou.msgbox.springmvc.controller.HomeController" scope="prototype" />
+	<bean name="homeController" class="com.cangshudoudou.msgbox.springmvc.controller.HomeController" scope="prototype" />
 	
 </beans>
