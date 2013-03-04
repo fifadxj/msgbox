@@ -78,6 +78,12 @@
             <artifactId>jackson-jaxrs</artifactId>
             <version>1.9.12</version>
         </dependency>
+        
+        <dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.7</version>
+		</dependency>
 
         <!-- spring begin -->
         <!-- Core utilities used by other modules. Define this if you use Spring 

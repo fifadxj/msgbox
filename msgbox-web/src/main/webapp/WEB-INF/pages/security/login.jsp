@@ -54,9 +54,15 @@
             <img src="resources/images/icons/cross_circle.png" /><span class="error"><spring:message code="${errorcode}" /></span>
           </c:if>
           </div>
+          
+          <p>
+            <label for="username"><spring:message code="security.login.username" /></label>
+            <form:input class="validate[required] text-input" type="text" path="username" id="username" />
+          </p>
+          
 	      <p>
-	        <label for="passcode"><spring:message code="security.login.passcode" /></label>
-	        <form:input class="validate[required] text-input" type="text" path="passcode" id="passcode" />
+	        <label for="password"><spring:message code="security.login.password" /></label>
+	        <form:input class="validate[required] text-input" type="text" path="password" id="password" />
 	      </p>
 	      
 	      <p>
@@ -64,7 +70,7 @@
             <form:radiobutton path="language" id="zh" value="zh" />
             <label for="zh"><spring:message code="language.chinese" /></label>
             <form:radiobutton path="language" id="en" value="en" />
-            <label for="en"><spring:message code="language.chinese" /></label>
+            <label for="en"><spring:message code="language.english" /></label>
           </p>
 
 	      <p>

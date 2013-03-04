@@ -1,9 +1,8 @@
-package com.cangshudoudou.msgbox.utils;
+package com.cangshudoudou.msgbox.springmvc.utils;
 
 
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;

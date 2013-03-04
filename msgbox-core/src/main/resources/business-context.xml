@@ -56,6 +56,10 @@
         <property name="categoryDao" ref="categoryDao" />
     </bean>
     
+    <bean id="securityService" class="com.cangshudoudou.msgbox.service.impl.SecurityServiceImpl">
+        <property name="userDao" ref="userDao" />
+    </bean>
+    
     <bean id="parentDao" class="com.cangshudoudou.msgbox.dao.hibernate.DaoSupport" abstract="true">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
@@ -64,5 +68,8 @@
 	</bean>
 	
 	<bean id="messageDao" class="com.cangshudoudou.msgbox.dao.hibernate.MessageDaoImpl" parent="parentDao">
+    </bean>
+    
+    <bean id="userDao" class="com.cangshudoudou.msgbox.dao.hibernate.UserDaoImpl" parent="parentDao">
     </bean>
 </beans>

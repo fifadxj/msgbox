@@ -1,15 +1,17 @@
 
     alter table CATEGORIES 
         drop 
-        foreign key FK6A31321CDEF26E64;
+        foreign key FK6A31321CDE6B9868;
 
     alter table MESSAGES 
         drop 
-        foreign key FK131AF14C6CA4B679;
+        foreign key FK131AF14C6C1DE07D;
 
     drop table if exists CATEGORIES;
 
     drop table if exists MESSAGES;
+
+    drop table if exists USERS;
 
     create table CATEGORIES (
         ID bigint not null auto_increment,
@@ -32,14 +34,21 @@
         primary key (ID)
     ) ENGINE=InnoDB;
 
+    create table USERS (
+        ID bigint not null auto_increment,
+        PASSWORD varchar(255) not null,
+        USERNAME varchar(255) not null unique,
+        primary key (ID)
+    ) ENGINE=InnoDB;
+
     alter table CATEGORIES 
-        add index FK6A31321CDEF26E64 (PARENT_CATEGORY_ID), 
-        add constraint FK6A31321CDEF26E64 
+        add index FK6A31321CDE6B9868 (PARENT_CATEGORY_ID), 
+        add constraint FK6A31321CDE6B9868 
         foreign key (PARENT_CATEGORY_ID) 
         references CATEGORIES (ID);
 
     alter table MESSAGES 
-        add index FK131AF14C6CA4B679 (CATEGORY_ID), 
-        add constraint FK131AF14C6CA4B679 
+        add index FK131AF14C6C1DE07D (CATEGORY_ID), 
+        add constraint FK131AF14C6C1DE07D 
         foreign key (CATEGORY_ID) 
         references CATEGORIES (ID);

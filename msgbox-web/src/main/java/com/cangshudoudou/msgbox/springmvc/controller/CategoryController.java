@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cangshudoudou.msgbox.BusinessException;
-import com.cangshudoudou.msgbox.utils.CommonUtils;
+import com.cangshudoudou.msgbox.springmvc.utils.CommonUtils;
 import com.cangshudoudou.msgbox.vo.Category;
 
 public class CategoryController extends BaseMsgboxController {
@@ -76,7 +76,7 @@ public class CategoryController extends BaseMsgboxController {
         } catch (BusinessException be) {
             result.setViewName("/category/create");
             
-            result.addObject("error", be.getCode() + ": " + be.getMessage());
+            result.addObject("error", be.getCode());
             result.addObject("command", command);
             List<Category> categories = categoryService.listCategories();
             result.addObject("categories", categories);
@@ -124,7 +124,7 @@ public class CategoryController extends BaseMsgboxController {
         } catch (BusinessException be) {
             result.setViewName("/category/edit");
                         
-            result.addObject("error", be.getCode() + ": " + be.getMessage());
+            result.addObject("error", be.getCode());
             result.addObject("command", command);
             result.addObject("categories", getParentCandidatesSortedByPinyin(command.getId()));
         }        

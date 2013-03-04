@@ -26,6 +26,7 @@
         
         <mapping class="com.cangshudoudou.msgbox.vo.Message" />
         <mapping class="com.cangshudoudou.msgbox.vo.Category" />
+        <mapping class="com.cangshudoudou.msgbox.vo.User" />
         <!-- <mapping class="com.cangshudoudou.msgbox.Comment" /> -->
         
  

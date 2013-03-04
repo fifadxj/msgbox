@@ -7,12 +7,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.ListUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cangshudoudou.msgbox.BusinessException;
-import com.cangshudoudou.msgbox.utils.CommonUtils;
+import com.cangshudoudou.msgbox.springmvc.utils.CommonUtils;
 import com.cangshudoudou.msgbox.vo.Category;
 import com.cangshudoudou.msgbox.vo.Message;
 import com.cangshudoudou.msgbox.vo.MessageFilterCondition;
@@ -93,7 +91,7 @@ public class MessageController extends BaseMsgboxController {
             Message message = messageService.createMessage(command);
             result.setViewName("redirect:/web/message/view.html?id=" + message.getId());
         } catch (BusinessException be) {
-            result.addObject("error", be.getCode() + ": " + be.getMessage());
+            result.addObject("error", be.getCode());
             result.setViewName("/message/create");
             result.addObject("command", command);
             
@@ -130,9 +128,9 @@ public class MessageController extends BaseMsgboxController {
         } catch (BusinessException be) {
             result.setViewName("/message/edit");
             
-            command = messageService.getMessage(command.getId());
+            //command = messageService.getMessage(command.getId());
             result.addObject("command", command);
-            result.addObject("error", be.getCode() + ": " + be.getMessage());
+            result.addObject("error", be.getCode());
            
             List<Category> categories = categoryService.listCategories();
             result.addObject("categories", categories);

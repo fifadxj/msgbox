@@ -11,6 +11,10 @@ public class MsgboxException extends RuntimeException {
         this.code = code;
     }
 
+    public MsgboxException() {
+        super();
+    }
+    
     public MsgboxException(String code) {
         super(code);
         this.code = code;
@@ -29,6 +33,10 @@ public class MsgboxException extends RuntimeException {
     public MsgboxException(String code, Throwable cause) {
         super(code, cause);
         this.code = code;
+    }
+
+    public MsgboxException(Throwable cause) {
+        super(cause);
     }
     
 }

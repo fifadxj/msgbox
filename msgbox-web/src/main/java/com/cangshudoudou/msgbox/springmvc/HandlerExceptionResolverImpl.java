@@ -19,7 +19,7 @@ public class HandlerExceptionResolverImpl implements HandlerExceptionResolver {
         ex.printStackTrace();
         String error;
         if (ex instanceof BusinessException) {
-            error = ((BusinessException) ex).getCode() + " - " + ex.getMessage();
+            error = ((BusinessException) ex).getCode();
             ModelAndView mav = new ModelAndView("error");
             mav.addObject("error", error);
             return mav;

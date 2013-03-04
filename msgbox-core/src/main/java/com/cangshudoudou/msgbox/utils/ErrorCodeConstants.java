@@ -24,6 +24,6 @@ public class ErrorCodeConstants {
     
     
     public static final String ERR_USER_NOT_LOGIN = "ERR_USER_NOT_LOGIN";
-    
+    public static final String ERR_SECURITY_INVALID_CREDENTIAL = "ERR_SECURITY_INVALID_CREDENTIAL";
 
 }

@@ -147,6 +147,7 @@
 	<bean name="securityController" class="com.cangshudoudou.msgbox.springmvc.controller.SecurityController" parent="baseMsgboxController" scope="prototype">
         <property name="sessionData" ref="sessionData" />
         <property name="localeResolver" ref="localeResolver" />
+        <property name="securityService" ref="securityService" />
     </bean>
 	<bean name="homeController" class="com.cangshudoudou.msgbox.springmvc.controller.HomeController" scope="prototype" />
 	
