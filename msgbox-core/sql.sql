@@ -23,12 +23,13 @@
 
     create table MESSAGES (
         ID bigint not null auto_increment,
-        CONTENT longtext not null,
+        CONTENT longtext,
         CREATED_DATE DATETIME not null,
         DISABLED bit not null,
         MODIFIED_DATE DATETIME not null,
         RANK integer not null,
         SOURCE varchar(255),
+        TITLE varchar(255),
         TOP bit not null,
         CATEGORY_ID bigint not null,
         primary key (ID)

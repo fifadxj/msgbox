@@ -30,10 +30,10 @@ public class Message {
     @Column(name="ID")
     Long id;
     
-//    @Column(name="TITLE",length=255, unique=true, nullable=false)
-//    String title;
+    @Column(name="TITLE",length=255, unique=false, nullable=true)
+    String title;
     
-    @Column(name="CONTENT", nullable=false)
+    @Column(name="CONTENT", nullable=true)
     @Lob
     String content;
     
@@ -69,6 +69,12 @@ public class Message {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
     }
     public String getContent() {
         return content;

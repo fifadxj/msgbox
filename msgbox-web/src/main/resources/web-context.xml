@@ -56,21 +56,13 @@
 	    <property name="defaultLocale" value="zh"/>
 	</bean>
     
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10000000" />
+    </bean>
+    
     <bean name="sessionData" class="com.cangshudoudou.msgbox.utils.SessionData" scope="session">
         <aop:scoped-proxy />
     </bean>
-    
-    <!-- <bean id="handlerMapping" class="com.cangshudoudou.msgbox.springmvc.MsgboxControllerBeanNameHandlerMapping">
-        <property name="urlPrefix" value="/" />
-        <property name="urlSuffix" value=".html" />
-        <property name="clearWord" value="Controller" />
-        
-        <property name="interceptors">
-            <list>
-            <ref bean="authenticationInterceptor"/>
-            </list>
-        </property>
-    </bean> -->
     
     <bean name="authenticationInterceptor" class="com.cangshudoudou.msgbox.springmvc.AuthenticationInterceptor">
         <property name="sessionData" ref="sessionData" />

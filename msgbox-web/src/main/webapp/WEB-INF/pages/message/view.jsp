@@ -36,6 +36,12 @@
              <td>${message.source}</td>
           </tr>
           <tr>
+            <td><spring:message code="message.title" /></td>
+          </tr>
+          <tr>
+             <td>${message.title}</td>
+          </tr>
+          <tr>
             <td><spring:message code="message.content" /></td>
           </tr>
           <tr>

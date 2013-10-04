@@ -53,10 +53,16 @@
             <td><form:input path="source" class="text-input" size="80" type="text" /></td>
           </tr>
           <tr>
+            <td><spring:message code="message.title" /></td>
+          </tr>
+          <tr>
+            <td><form:input path="title" class="validate[groupRequired[title_content]], text-input" size="80" type="text" /></td>
+          </tr>
+          <tr>
             <td><spring:message code="message.content" /></td>
           </tr>
           <tr>
-            <td><form:textarea path="content" class="validate[required] textarea wysiwyg" name="textfield" cols="1" rows="8"></form:textarea></td>
+            <td><form:textarea path="content" class="validate[groupRequired[title_content]] textarea wysiwyg" name="textfield" cols="1" rows="8"></form:textarea></td>
           </tr>
       </table>
   </div>

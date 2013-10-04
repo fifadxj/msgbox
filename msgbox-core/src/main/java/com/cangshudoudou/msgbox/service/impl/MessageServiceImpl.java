@@ -37,8 +37,8 @@ public class MessageServiceImpl implements MessageService {
             throw new IllegalArgumentException();
         }
         
-        if (! StringUtils.hasText(message.getContent())) {
-            throw new BusinessException(ErrorCodeConstants.ERR_MESSAGE_CONTENT_REQUIRED);
+        if (! StringUtils.hasText(message.getTitle()) && ! StringUtils.hasText(message.getContent())) {
+            throw new BusinessException(ErrorCodeConstants.ERR_MESSAGE_TITLE_OR_CONTENT_REQUIRED);
         }
         
         if (StringUtils.hasText(message.getSource()) && message.getSource().length() > 50) {
@@ -83,8 +83,8 @@ public class MessageServiceImpl implements MessageService {
             throw new IllegalArgumentException();
         }
         
-        if (! StringUtils.hasText(message.getContent())) {
-            throw new BusinessException(ErrorCodeConstants.ERR_MESSAGE_CONTENT_REQUIRED);
+        if (! StringUtils.hasText(message.getTitle()) && ! StringUtils.hasText(message.getContent())) {
+            throw new BusinessException(ErrorCodeConstants.ERR_MESSAGE_TITLE_OR_CONTENT_REQUIRED);
         }
         
         if (StringUtils.hasText(message.getSource()) && message.getSource().length() > 50) {
@@ -112,6 +112,7 @@ public class MessageServiceImpl implements MessageService {
         indb.setContent(message.getContent());
         indb.setRank(message.getRank());
         indb.setSource(message.getSource());
+        indb.setTitle(message.getTitle());
 
         messageDao.updateMessage(indb);
         

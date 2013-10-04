@@ -35,7 +35,8 @@
       <table>
         <thead>
           <tr>
-            <th style="width:50%"><spring:message code="message.content" /></th>
+            <th style="width:20%"><spring:message code="message.title" /></th>
+            <th style="width:30%"><spring:message code="message.content" /></th>
             <th style="width:15%"><spring:message code="message.category.name" /></th>
             <th style="width:10%"><spring:message code="message.rank" /></th>
             <th style="width:10%"><spring:message code="message.source" /></th>
@@ -52,7 +53,8 @@
 	      <spring:url value="/web/message/top.html?id=${message.id}" var="top" htmlEscape="true"/>
 	      <spring:url value="/web/message/untop.html?id=${message.id}" var="untop" htmlEscape="true"/>
 	      <tr>
-	        <td><a href="${view}"><str:truncateNicely upper="30">${message.content}</str:truncateNicely></a></td>
+	        <td><a href="${view}"><str:truncateNicely upper="10">${message.title}</str:truncateNicely></a></td>
+	        <td><a href="${view}"><str:truncateNicely upper="20">${message.content}</str:truncateNicely></a></td>
 	        <td>${message.category.name}</td>
 	        <td>${message.rank}</td>
 	        <td>${message.source}</td>
@@ -83,7 +85,8 @@
       <table>
         <thead>
           <tr>
-            <th style="width:50%"><spring:message code="message.content" /></th>
+            <th style="width:20%"><spring:message code="message.title" /></th>
+            <th style="width:30%"><spring:message code="message.content" /></th>
             <th style="width:15%"><spring:message code="message.category.name" /></th>
             <th style="width:10%"><spring:message code="message.rank" /></th>
             <th style="width:15%"><spring:message code="message.source" /></th>
@@ -100,7 +103,8 @@
           <spring:url value="/web/message/top.html?id=${message.id}" var="top" htmlEscape="true"/>
           <spring:url value="/web/message/untop.html?id=${message.id}" var="untop" htmlEscape="true"/>
           <tr>
-            <td><a href="${view}"><str:truncateNicely upper="30">${message.content}</str:truncateNicely></a></td>
+            <td><a href="${view}"><str:truncateNicely upper="10">${message.title}</str:truncateNicely></a></td>
+            <td><a href="${view}"><str:truncateNicely upper="20">${message.content}</str:truncateNicely></a></td>
             <td>${message.category.name}</td>
             <td>${message.rank}</td>
             <td>${message.source}</td>
