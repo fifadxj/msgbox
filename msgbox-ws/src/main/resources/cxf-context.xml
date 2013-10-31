@@ -47,6 +47,7 @@
 		</jaxrs:outFaultInterceptors>
 		<jaxrs:serviceBeans>
 			<ref bean="messageEndpoint" />
+			<ref bean="securityEndpoint" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jsonProvider" />
@@ -79,6 +80,11 @@
 		<!-- <property name="categoryService" ref="categoryService" /> -->
         <property name="messageService" ref="messageService" />
 	</bean>
+	
+	<bean id="securityEndpoint" class="com.cangshudoudou.msgbox.ws.endpoint.impl.SecurityEndpointImpl">
+        <property name="securityService" ref="securityService" />
+        <property name="sessionData" ref="sessionData" />
+    </bean>
 
 	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider">
 		<property name="mapper" ref="jacksonMapper" />
