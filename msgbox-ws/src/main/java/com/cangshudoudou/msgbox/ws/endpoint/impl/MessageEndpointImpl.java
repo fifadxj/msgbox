@@ -34,12 +34,12 @@ public class MessageEndpointImpl implements MessageEndpoint {
     public MessageListResponse getMessageList(MessageListRequest request) {
         MessageListResponse response = new MessageListResponse();
         
-            if (request.getCondition() == null) {
-                request.setCondition(new MessageFilterCondition());
-            }
-            List<Message> messages = messageService.listMessages(request.getCondition(), null);
+        if (request.getCondition() == null) {
+            request.setCondition(new MessageFilterCondition());
+        }
+        List<Message> messages = messageService.listMessages(request.getCondition(), null);
 
-            response.setMessages(messages);
+        response.setMessages(messages);
 
         return response;
     }
