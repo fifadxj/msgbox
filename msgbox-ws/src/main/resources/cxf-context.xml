@@ -38,9 +38,11 @@
     
 	<jaxrs:server address="/">
 		<jaxrs:inInterceptors>
+		    <ref bean="GZIPInInterceptor" />
 			<ref bean="AuthenticationInterceptor" />
 		</jaxrs:inInterceptors>
 		<jaxrs:outInterceptors>
+		    <ref bean="GZIPOutInterceptor" />
 		</jaxrs:outInterceptors>
 		<jaxrs:outFaultInterceptors>
 			<ref bean="faultInterceptor" />
@@ -86,7 +88,7 @@
         <property name="sessionData" ref="sessionData" />
     </bean>
 
-	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider">
+	<bean id="jsonProvider" class="com.cangshudoudou.msgbox.ws.utils.MsgboxJsonProvider">
 		<property name="mapper" ref="jacksonMapper" />
 	</bean>
 	<bean id="jacksonMapper" class="org.codehaus.jackson.map.ObjectMapper">
@@ -96,4 +98,8 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="GZIPOutInterceptor" class="org.apache.cxf.transport.common.gzip.GZIPOutInterceptor">
+        <property name="threshold" value="128" />
+    </bean>
+    <bean id="GZIPInInterceptor" class="org.apache.cxf.transport.common.gzip.GZIPInInterceptor" />
 </beans>
