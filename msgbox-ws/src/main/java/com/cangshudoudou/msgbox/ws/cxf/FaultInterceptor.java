@@ -4,6 +4,7 @@ package com.cangshudoudou.msgbox.ws.cxf;
 import java.io.OutputStream;
 import java.text.MessageFormat;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
@@ -22,8 +23,9 @@ import com.cangshudoudou.msgbox.ws.utils.WsConstants;
 import com.cangshudoudou.msgbox.ws.utils.WsUtils;
 
 public class FaultInterceptor extends AbstractPhaseInterceptor<Message> {
-    private static Logger logger = LoggerFactory.getLogger(WsConstants.LOGGER_WS_EXCEPTION);
-    
+    private static Logger exLogger = LoggerFactory.getLogger(WsConstants.LOGGER_WS_EXCEPTION);
+	private static Logger messageLogger = LoggerFactory.getLogger(WsConstants.LOGGER_WS_MESSAGE);
+	
     public FaultInterceptor() {
         super(Phase.PRE_LOGICAL);
     }
@@ -39,19 +41,23 @@ public class FaultInterceptor extends AbstractPhaseInterceptor<Message> {
                 if (t != null) {
                     if (t instanceof MsgboxException) {
                         MsgboxException me = (MsgboxException) t;
-                        logger.error(me.getCode());
+                        exLogger.error(me.getCode());
                         errorCode = me.getCode();
                     } else {
-                        logger.error(fault.getMessage(), fault);
+                        exLogger.error(fault.getMessage(), fault);
                         errorCode = ErrorCodeConstants.ERR_UNKNOW_EXCEPTION;
                     }
                 } else {
-                    logger.error(fault.getMessage(), fault);
+                    exLogger.error(fault.getMessage(), fault);
                     errorCode = ErrorCodeConstants.ERR_UNKNOW_EXCEPTION;
                 }
                 
+                HttpServletRequest httpRequest = (HttpServletRequest) message.getExchange().getInMessage().get(AbstractHTTPDestination.HTTP_REQUEST);
+                
                 HttpServletResponse response = (HttpServletResponse) message.getExchange().getInMessage()
                         .get(AbstractHTTPDestination.HTTP_RESPONSE);
+                
+                
                 response.setContentType(MediaType.APPLICATION_JSON);
 
                 MessageFormat mf = new MessageFormat("\"code\":\"{0}\",\"message\":\"{1}\"");
@@ -59,13 +65,16 @@ public class FaultInterceptor extends AbstractPhaseInterceptor<Message> {
 
                 
                 output = "{\"error\":{" + mf.format(new Object[] { errorCode, errorCode }) + "}}";
-
+                
+                String path = (String) message.getExchange().getInMessage().get(Message.PATH_INFO);
+                messageLogger.info("{} - Response - {}" ,new Object[]{path, output});
+                
                 os = response.getOutputStream();
                 os.write(output.getBytes());
                 os.flush();
             }
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            exLogger.error(e.getMessage(), e);
         } finally {
             message.getInterceptorChain().abort();
 
@@ -74,7 +83,7 @@ public class FaultInterceptor extends AbstractPhaseInterceptor<Message> {
                     os.close();
                 }
             } catch (Exception e) {
-                logger.error(e.getMessage(), e);
+                exLogger.error(e.getMessage(), e);
             }
         }
     }
