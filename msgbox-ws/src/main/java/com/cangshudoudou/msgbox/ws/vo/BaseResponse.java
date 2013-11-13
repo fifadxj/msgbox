@@ -3,18 +3,18 @@ package com.cangshudoudou.msgbox.ws.vo;
 import java.util.Date;
 
 public class BaseResponse {
-    private ResponseHeader responseHeader;
+    private ResponseHeader header;
+
+    public ResponseHeader getHeader() {
+        return header;
+    }
+
+    public void setHeader(ResponseHeader header) {
+        this.header = header;
+    }
 
     public BaseResponse() {
-        responseHeader = new ResponseHeader();
-    }
-    
-    public ResponseHeader getResponseHeader() {
-        return responseHeader;
-    }
-
-    public void setResponseHeader(ResponseHeader responseHeader) {
-        this.responseHeader = responseHeader;
+        header = new ResponseHeader();
     }
     
 }

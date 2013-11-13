@@ -1,23 +1,17 @@
 package com.cangshudoudou.msgbox.ws.vo;
 
 public class BaseRequest {
-	private String language;
-	private String token;
+    private RequestHeader header;
 
-	public String getLanguage() {
-		return language;
-	}
+    public BaseRequest() {
+        header = new RequestHeader();
+    }
+    
+    public RequestHeader getHeader() {
+        return header;
+    }
 
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
+    public void setHeader(RequestHeader header) {
+        this.header = header;
+    }
 }
