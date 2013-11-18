@@ -44,7 +44,6 @@
 		</jaxrs:inInterceptors>
 		<jaxrs:outInterceptors>
 		    <ref bean="cacheResponseInterceptor" />
-		    
 		    <ref bean="logInterceptor" />
 		</jaxrs:outInterceptors>
 		<jaxrs:outFaultInterceptors>
@@ -65,7 +64,6 @@
 		<property name="secureUrls">
 			<list>
 				<value>/security/login</value>
-				<value>/security/logout</value>
 				<!-- <value>/message/list</value> -->
 			</list>
 		</property>

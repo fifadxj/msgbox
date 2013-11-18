@@ -13,13 +13,16 @@ import com.cangshudoudou.msgbox.MsgboxException;
 import com.cangshudoudou.msgbox.service.MessageService;
 import com.cangshudoudou.msgbox.vo.Message;
 import com.cangshudoudou.msgbox.vo.MessageFilterCondition;
+import com.cangshudoudou.msgbox.ws.endpoint.BaseEndpoint;
 import com.cangshudoudou.msgbox.ws.endpoint.MessageEndpoint;
 import com.cangshudoudou.msgbox.ws.utils.WsUtils;
+import com.cangshudoudou.msgbox.ws.vo.MessageDetailsRequest;
+import com.cangshudoudou.msgbox.ws.vo.MessageDetailsResponse;
 import com.cangshudoudou.msgbox.ws.vo.MessageListRequest;
 import com.cangshudoudou.msgbox.ws.vo.MessageListResponse;
 
 @Path("/message")
-public class MessageEndpointImpl implements MessageEndpoint {
+public class MessageEndpointImpl extends BaseEndpoint implements MessageEndpoint {
 
     private MessageService messageService;
 
@@ -41,6 +44,21 @@ public class MessageEndpointImpl implements MessageEndpoint {
 
         response.setMessages(messages);
 
+        return response;
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/view")
+    public MessageDetailsResponse getMessage(MessageDetailsRequest request) {
+        
+        MessageDetailsResponse response = new MessageDetailsResponse();
+        
+        Message message = messageService.getMessage(request.getId());
+        
+        response.setMessage(message);
+        
         return response;
     }
 
