@@ -47,7 +47,7 @@ iptables -t nat -F
 iptables -t nat -X
 iptables -t nat -Z
 
-9. add forward rules in iptables
+9. add forward rules in iptables (or as of now, execute on shell directly)
 vi /etc/rc.local
 ===========================
 iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o eth0 -j MASQUERADE
