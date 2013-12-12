@@ -30,6 +30,7 @@ vpnonly * vpnonly *
 5. restart pptp server
 #/etc/init.d/pptpd stop
 #/etc/init.d/pptpd start
+#netstat –an | grep 1723
 /etc/init.d/pptpd restart
 
 6. enable ipv4 forward
