@@ -14,6 +14,7 @@ mysql -uroot -p
 -l: show listened port only
 -a: show all (listened + established)
 -n: show as network ip
+-p: show pid and program name
 
 netstat -tl | grep mysql
 netstat -ta | grep mysql
