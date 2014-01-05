@@ -1,0 +1,13 @@
+{{#if showDialog}}
+    <div class="layer" {{bindAttr style="alertStyle"}} {{action "stopBubbLing" on="click" target="App.AlertHandler"}}>
+        <div id="lightbox" class="lightbox" {{bindAttr style="lightBoxStyle"}}>
+            <p class="text-content">
+                {{message}}
+            </p>
+            <a href="#" class="button"}} {{action "okAction" on="click" target="App.AlertHandler"}}>{{okButtonTitle}}</a>
+            {{#if secondButton}}
+                <a href="#" class="button" {{action "cancelAction" on="click" target="App.AlertHandler"}}>{{secondButtonTitle}}</a>
+            {{/if}}
+        </div>
+    </div>
+{{/if}}

@@ -1,0 +1,24 @@
+<div>
+    <p class="sub-header">{{i18n.message.topMessages}}</p>
+</div>
+
+<table border="1">
+    <tbody>
+    {{#each item in messageList}}
+        <tr {{action "selectListItem" item on="click"}} {{bindAttr class=":clickable"}}>
+                <td class="text-content" style="width:30%">
+                    <a href="#">
+                        <div>
+                            <p>{{item.title}}</p>
+                        </div>
+                    </a>
+                </td>
+                <td class="text-content" style="width:70%">
+                    <a href="#">
+                        {{item.content}}
+                    </a>
+                </td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

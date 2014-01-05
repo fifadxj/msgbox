@@ -1,0 +1,15 @@
+{{view App.AlertView}}
+
+<section id="wrapper" class="wrapper">
+    <div class="sub-wrapper">
+        <header class="header">
+        {{outlet header}}
+        </header>
+        
+        <div>
+            {{outlet appbody}}
+        </div>
+
+        {{view App.LoadingView}}
+    </div>
+</section>

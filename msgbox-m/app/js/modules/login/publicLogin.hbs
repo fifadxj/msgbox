@@ -1,0 +1,18 @@
+<fieldset style="width: 80%; margin:0 auto;">
+    <div>
+        {{input type="text" value=controller.username placeholder=i18n.login.username class="input-text" maxlength="16" }}
+        {{input type="password" value=controller.password placeholder=i18n.login.password class="input-text" maxlength="16"}}
+        <input type="submit" {{action submitLogin}} {{bindAttr value="i18n.login.loginBtn"}} id="login_button" class="button">
+    </div>
+
+    <div class="language">
+    {{#each lang in App.i18n.languages}}
+    {{#if lang.current}}
+        <span class="current">{{lang.text}}</span>
+    {{else}}
+        <a href="#" {{action switchLanguage lang.key}}><span class="available">{{lang.text}}</span></a>
+    {{/if}}
+    {{/each}}
+    </div>
+
+</fieldset>

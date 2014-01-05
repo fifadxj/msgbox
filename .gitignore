@@ -1,4 +1,6 @@
 target/
+msgbox-m/dist
+msgbox-m/node_modules
 
 #Eclipse-specific
 .settings/

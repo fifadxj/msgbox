@@ -1,0 +1,17 @@
+<div style="display:inline-block; width:30%; text-algin:left;">
+{{#if showBack}}
+    <a href="#"{{action "goBack" target="controller"}}><span>Go Back</span></a>
+{{/if}}
+</div>
+
+<div style="display:inline-block; width:35%; text-align:center;">{{navTitle}}</div>
+
+<div style="display:inline-block; width:30%; text-align:right;">
+{{#if isLoggedIn}}
+    <a href="#" {{action "logout" href=true}}><span>Logout</span></a>
+{{else}}
+    <span>Guest</span>
+{{/if}}
+</div>
+
+<div style="clear:both"></div>

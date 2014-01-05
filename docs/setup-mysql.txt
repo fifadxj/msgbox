@@ -1,0 +1,19 @@
+reference:
+https://help.ubuntu.com/lts/serverguide/mysql.html
+
+1.
+apt-get install mysql-server
+
+2.
+netstat -tl | grep mysql
+netstat -ta | grep mysql
+netstat -tan | grep 3306
+
+3.
+service mysql restart
+
+4.
+vi /etc/mysql/my.cnf
+=========================
+bind-address=0.0.0.0
+=========================
