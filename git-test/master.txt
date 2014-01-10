@@ -1,4 +1,0 @@
-master
-master3
-master4
-master5
