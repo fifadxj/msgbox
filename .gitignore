@@ -1,8 +1,10 @@
 target/
 msgbox-m/dist
+msgbox-m/release
 msgbox-m/node_modules
 
 #Eclipse-specific
 .settings/
 .classpath
 .project
+bin/

@@ -1,7 +1,7 @@
 module.exports = {
 	sit : {
-		host : 'localhost',
-		port : 60000
+		host : '106.187.90.33',
+		port : 80
 	},
 	mock: {
 		host : 'localhost',
