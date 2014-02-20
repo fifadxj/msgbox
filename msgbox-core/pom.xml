@@ -90,6 +90,14 @@
 		    <artifactId>commons-codec</artifactId>
 		    <version>1.7</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>redis.clients</groupId>
+		    <artifactId>jedis</artifactId>
+		    <version>2.2.1</version>
+		    <type>jar</type>
+		    <scope>compile</scope>
+		</dependency>
 
         <!-- spring begin -->
         <!-- Core utilities used by other modules. Define this if you use Spring 
