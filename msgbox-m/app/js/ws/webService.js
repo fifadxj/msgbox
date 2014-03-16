@@ -30,7 +30,7 @@ ws = {
 			}
 		};
 
-	    if(window.navigator.onLine) {
+	    if(/*window.navigator.onLine*/ true) {
 	        var url = ws.getServiceUrl(serviceName);
 	    	return $.ajax(url, settings);
 	    } else {

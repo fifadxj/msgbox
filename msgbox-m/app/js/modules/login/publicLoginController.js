@@ -69,10 +69,6 @@ App.PublicLoginController = App.BaseController.extend({
 	_clearInput : function() {
         this.set('username', null);
         this.set('password', null);
-       
-        $(document).find('[placeholder]').each(function() {
-            BoxUtils.clearInputText($(this));
-        });
 	}
 });
 

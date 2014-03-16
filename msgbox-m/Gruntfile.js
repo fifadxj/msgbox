@@ -8,6 +8,7 @@ module.exports = function(grunt) {
         pkg : grunt.file.readJSON('package.json'),
         wsContext: 'msgbox-ws',
         clientContext: 'msgbox-m',
+        wsConfig: require('./server/ws-config.js'),
 
         compress : {
             main: {
@@ -131,13 +132,35 @@ module.exports = function(grunt) {
                 options : {
                     variables : {
                         'cssName' : 'main_<%=releaseDate%>',
-                        'webserviceUrl' : '/<%=wsContext%>/services/',
                         'version' : '<%=releaseDate%>'
                     },
                     prefix : '@@'
                 },
                 files : {
-                    'dist/index.html' : ['dist/index.html'],
+                    'dist/index.html' : ['dist/index.html']
+                }
+            },
+
+            wrapperWs : {
+                options : {
+                    variables : {
+                        'webserviceUrl' : "http://<%=wsConfig[env]['host']%>:<%=wsConfig[env]['port']%>/<%=wsContext%>/services/"
+                    },
+                    prefix : '@@'
+                },
+                files : {
+                    'dist/main_<%=releaseDate%>.js' : [ 'dist/main_<%=releaseDate%>.js' ]
+                }
+            },
+
+            webWs : {
+                options : {
+                    variables : {
+                        'webserviceUrl' : "/<%=wsContext%>/services/"
+                    },
+                    prefix : '@@'
+                },
+                files : {
                     'dist/main_<%=releaseDate%>.js' : [ 'dist/main_<%=releaseDate%>.js' ]
                 }
             }
@@ -146,30 +169,26 @@ module.exports = function(grunt) {
 
 	// Default task.
 	grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-ember-handlebars');
 	grunt.loadNpmTasks('grunt-ember-templates');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-replace');
-    grunt.loadNpmTasks('grunt-data-uri');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
 
-    grunt
-        .registerTask(
+    //grunt.loadNpmTasks('grunt-contrib-uglify');
+    //grunt.loadNpmTasks('grunt-contrib-imagemin');
+    //grunt.loadNpmTasks('grunt-contrib-jshint');
+    //grunt.loadNpmTasks('grunt-contrib-jasmine');
+
+    grunt.registerTask(
         'server',
         'Start a custom web server.',
         function() {
             this.async();
-            var t_args = [].slice.call(arguments);
-            var t_env = t_args[0];
-            var t_wsConfigs = require('./server/ws-config.js')[t_env];
+            var t_env = grunt.config('env');
             var t_options = {
-                wsConfig: t_wsConfigs,
+                wsConfig: grunt.config('wsConfig')[t_env],
                 src: 'dist',
                 clientContext: grunt.config('clientContext'),
                 wsContext: grunt.config('wsContext')
@@ -180,12 +199,19 @@ module.exports = function(grunt) {
 
         });
 
+    grunt.registerTask('env', 'replace wrapper ws url', function() {
+        var t_args = [].slice.call(arguments);
+        var t_env = t_args[0];
+        grunt.config('env', t_env);
+    })
+
     grunt.registerTask('build', [
                                  'clean', 
                                  'emberTemplates', 
                                  'concat', 
                                  'copy', 
-                                 'replace'/*, 
+                                 'replace:html',
+                                 'replace:webWs'/*, 
                                  'imagemin'*/
                                  /*'jasmine',*/
                                  ]);
@@ -193,18 +219,30 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('run-sit', [
+        'env:sit',
         'build',
-        'server:sit'
+        'server'
     ]);
 
     grunt.registerTask('run-mock', [
+        'env:mock',
         'build',
-        'server:mock'
+        'server'
     ]);
 
     grunt.registerTask('package', [
         'build',
         /*'uglifyFiles',*/
         'compress'
+    ]);
+
+    grunt.registerTask('wrapper-sit', [
+        'env:sit',
+        'clean', 
+        'emberTemplates', 
+        'concat', 
+        'copy', 
+        'replace:html',
+        'replace:wrapperWs'
     ]);
 };
