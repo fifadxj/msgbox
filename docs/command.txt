@@ -1,0 +1,17 @@
+#netstat
+netstat -lnp
+-t: show tcp only
+-u: show udp only
+-l: show listened port only
+-a: show all (listened + established)
+-n: show as network ip
+-p: show pid and program name
+
+#regenerate ssh login key
+ssh-keygen -R 106.187.90.33
+
+#filesystem's disk usage
+df -h
+
+#folder's disk usage
+du -ha --max-depth=1

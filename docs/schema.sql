@@ -1,3 +1,4 @@
+CREATE DATABASE MSGBOX CHARACTER SET = UTF8;
 
     alter table CATEGORIES 
         drop 

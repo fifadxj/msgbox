@@ -1,10 +1,18 @@
 reference:
 https://help.ubuntu.com/community/PPTPServer
 http://blog.istef.info/2008/10/17/ubuntu-pptp-server/
+http://www.photonvps.com/billing/knowledgebase.php?action=displayarticle&id=58
 
 steps:
 1. install pptp server
+#unbuntu
 apt-get install pptpd
+
+#CentOS
+yum install ppp
+cd /usr/local/src
+wget http://poptop.sourceforge.net/yum/stable/packages/pptpd-1.4.0-1.el6.x86_64.rpm
+rpm -Uhv pptpd-1.4.0-1.el6.x86_64.rpm
 
 2. configure ip
 vi /etc/pptpd.conf
@@ -14,7 +22,8 @@ remoteip 192.168.0.100-200
 ===========================
 
 3. configure dns 
-vi /etc/ppp/pptpd-options
+vi /etc/ppp/pptpd-options (Unbuntu)
+vi /etc/ppp/options.pptpd (CentOS)
 ===========================
 ms-dns 8.8.8.8
 ms-dns 8.8.4.4
@@ -30,8 +39,8 @@ vpnonly * vpnonly *
 5. restart pptp server
 #/etc/init.d/pptpd stop
 #/etc/init.d/pptpd start
-#netstat –an | grep 1723
 /etc/init.d/pptpd restart
+#netstat -lnp | grep 1723
 
 6. enable ipv4 forward
 vi /etc/sysctl.conf

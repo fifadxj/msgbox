@@ -5,17 +5,22 @@ add user steps:
 1. add user(force creating home folder, use rbash)
 useradd -m vpnonly -s /bin/rbash
 
-2. set password
+2. add rbash (for CentOS)
+cd /bin
+ln -s bash rbash
+
+3. set password
 passwd vpnonly
 
-3. set PATH to empty
-vi /home/vpnonly/.profile
+4. set PATH to empty
+vi /home/vpnonly/.profile (Ubuntu)
+vi /home/vpnonly/.bash_profile (CentOS)
 ==========================
 #append to the end of file
 PATH=""
 ==========================
 
-4. connect to ssh
+5. connect to ssh
 on Mac:
 ssh vpnonly@x.x.x.x -D 127.0.0.1:7777
 

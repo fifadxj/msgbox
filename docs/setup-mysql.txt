@@ -1,19 +1,37 @@
 reference:
 https://help.ubuntu.com/lts/serverguide/mysql.html
 
-1.
+1. install mysql
 apt-get install mysql-server
+./mysql --socket /tmp/mysql.sock
 
-2.
+2. check mysql listening port
 netstat -tl | grep mysql
 netstat -ta | grep mysql
 netstat -tan | grep 3306
 
-3.
-service mysql restart
+3. grant access to root
+mysql -uroot -p
+GRANT ALL ON *.* To 'root'@'%';
 
-4.
+4. set charset
+SET NAMES 'utf8';
+
+5. allow remote access
 vi /etc/mysql/my.cnf
 =========================
 bind-address=0.0.0.0
 =========================
+
+6. restart mysql 
+service mysql restart
+
+7. remote access mysql
+mysql -h127.0.0.1 -uroot -p
+
+
+
+
+
+
+

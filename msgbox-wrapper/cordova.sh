@@ -1,5 +1,4 @@
-PATH=$PATH:/Users/cbsd/tools:/Volumes/work/software/adt-bundle-mac-x86_64-20131030/sdk/tools:/Volumes/work/software/adt-bundle-mac-x86_64-20131030/sdk/platform-tools
-export PATH
+export PATH=$PATH:/workspace/tool/adt-bundle-mac-x86_64-20131030/sdk/platform-tools:/workspace/tool/adt-bundle-mac-x86_64-20131030/sdk/tools
 
 cd ../msgbox-m
 grunt wrapper-sit
@@ -20,6 +19,6 @@ cp www/img/logo.jpg platforms/android/res/drawable/icon.jpg
 
 cordova build
 
-cp platforms/android/bin/msgbox-debug.apk ../msgbox.apk
+cp platforms/android/ant-build/msgbox-debug.apk ../msgbox.apk
 
-rm -r ../msgbox-cordova
+#rm -r ../msgbox-cordova
