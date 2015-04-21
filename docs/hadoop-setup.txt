@@ -1,0 +1,22 @@
+yum install java-1.7.0-openjdk java-1.7.0-openjdk-devel
+
+vi /etc/profile
+export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.79.x86_64
+
+useradd hadoop
+chown -R hadoop:hadoop /opt/hadoop
+
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+#upload id_rsa and authorized_keys to ~/.ssh of all servers
+chmod 700 ~/.ssh
+chmod 604 ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/id_rsa
+
+upload hadoop to /opt/hadoop
+cd /opt/hadoop; tar -xf hadoop-2.6.0.tar.gz
+
+vi /etc/profile
+export HADOOP_HOME=/opt/hadoop/hadoop-2.6.0
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
