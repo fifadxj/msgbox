@@ -31,6 +31,10 @@ export HADOOP_HOME=/home/hadoop/hadoop-2.6.0
 export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 vi /etc/hosts #set hostname
+10.240.29.7     centos-master
+10.240.29.8     centos-slave1
+10.240.29.9     centos-slave2
+10.240.29.10    centos-slave3
 
 ==========================================================
 vi etc/hadoop/hadoop-env.sh
